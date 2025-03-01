@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import quizData from '../data/quizData';
+import quizData from '../data/levelsMarge.js';
 import '../styles/Quiz.css';
 
 function Quiz() {
