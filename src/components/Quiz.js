@@ -56,6 +56,15 @@ function Quiz() {
     if (answerIndex === currentQuestion.correctIndex) {
       setScore(score + 1);
     }
+
+    // GA イベント送信: 回答したことを記録
+    if (window.gtag) {
+      window.gtag('event', 'quiz_answer', {
+        event_category: 'quiz',
+        event_label: `level_${level}`,
+        value: answerIndex, // ユーザーが選んだ回答のindexを送る例
+      });
+    }
   };
 
   // 次の問題へ進む処理

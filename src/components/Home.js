@@ -7,6 +7,14 @@ function Home() {
 
   // 各クイズレベルボタン押下時にページ遷移
   const handleStartQuiz = (level) => {
+    // GA イベント送信: 各レベルの挑戦数を集計
+    if (window.gtag) {
+      window.gtag('event', 'quiz_start', {
+        event_category: 'quiz',
+        event_label: `level_${level}`,
+      });
+    }
+    
     navigate(`/quiz/${level}`);
   };
 
