@@ -22,15 +22,15 @@ function RouteChangeTracker() {
 function App() {
   return (
     <Router>
+      {/* ルート変更検知のコンポーネント */}
+      <RouteChangeTracker />
       <Routes>
-        {/* ホーム画面 */}
         <Route path="/" element={<Home />} />
-
-        {/* クイズ画面 : /quiz/1 や /quiz/2 ... のパスで表示 */}
         <Route path="/quiz/:level" element={<Quiz />} />
       </Routes>
     </Router>
   );
 }
+
 
 export default App;
