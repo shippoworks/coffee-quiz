@@ -1,35 +1,54 @@
 .home-container {
     text-align: center;
-    margin: 2rem;
+    margin: 0rem;
+    min-height: 100vh;
   }
   
   .home-title {
     font-size: 2.5rem;
-    color: #6b4e16; /* コーヒーっぽい色 */
+    color: #fd7200; /* コーヒーっぽい色 */
+    margin-top: 0;
+    padding-top: 3rem;
   }
   
   .home-intro {
-    font-size: 1.2rem;
-    margin: 1rem 0;
+    font-size: 0.9rem;
+    margin: 1rem 2rem;
+    color: #fd7200;
+    font-weight: bold;
+  }
+
+  .home-intro-eng {
+    font-size: 0.7rem;
+    margin: 1rem 2rem;
+    color: #fd7200;
+    font-weight: bold;
   }
   
   .quiz-level-buttons {
+    /* フレックスコンテナとして宣言 */
+    display: flex;
+    /* 縦並びにする */
+    flex-direction: column;
+    /* 横方向に中央寄せしたい場合 */
+    align-items: center;
     margin: 1.5rem 0;
   }
   
   .quiz-button {
     margin: 0.5rem;
-    padding: 0.7rem 1.2rem;
+    padding: 0.7rem 2.5rem;
     font-size: 1rem;
-    background-color: #c69c6d;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #fd7200;
+    font-weight: bold;
+    border-radius: 50px;
+    border-color: #fd7200;
     cursor: pointer;
   }
   
   .quiz-button:hover {
-    background-color: #a37944;
+    background-color: #ff8c00;
   }
   
   .contact-button-wrapper {
@@ -39,14 +58,15 @@
   .contact-button {
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
-    background-color: #4e342e;
+    background-color: #d1d1d1;
     color: #fff;
+    font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
   }
   
   .contact-button:hover {
-    background-color: #3e2723;
+    background-color: #b0b0b0;
   }
   

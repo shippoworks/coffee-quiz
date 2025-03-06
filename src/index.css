@@ -1,10 +1,17 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  box-sizing: border-box;
+  /* 画面全体を背景画像として設定 */
+  background: url("./assets/background.jpg") no-repeat center top;
+  /* 画像を常にアスペクト比を崩さずに拡大・縮小させて表示したい場合 */
+  background-size: cover;
 }
 
 code {

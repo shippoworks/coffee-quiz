@@ -14,7 +14,7 @@ function Home() {
         event_label: `level_${level}`,
       });
     }
-    
+
     navigate(`/quiz/${level}`);
   };
 
@@ -30,9 +30,14 @@ function Home() {
 
       {/* サイト紹介文 */}
       <p className="home-intro">
-        さまざまなレベルの問題を通してコーヒーの知識を深めてみましょう。
+        味は変わらない。
+        けれど知るほどに
         <br />
-        楽しみながらコーヒーについて学ぶことができます！
+        その一杯が物語になる。
+      </p>
+
+      <p className="home-intro-eng">
+        The taste never changes. Yet with each new insight, that single cup gently unfolds into a story all its own.
       </p>
 
       {/* レベル別クイズ開始ボタン */}
@@ -43,7 +48,7 @@ function Home() {
             onClick={() => handleStartQuiz(level)}
             className="quiz-button"
           >
-            レベル {level} を始める
+            Level {level}（30問）
           </button>
         ))}
       </div>
