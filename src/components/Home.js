@@ -18,10 +18,7 @@ function Home() {
     navigate(`/quiz/${level}`);
   };
 
-  // 問い合わせボタン押下時の処理(サンプル実装)
-  const handleContact = () => {
-    alert('お問い合わせありがとうございます。');
-  };
+  
 
   return (
     <div className="home-container">
@@ -53,12 +50,6 @@ function Home() {
         ))}
       </div>
 
-      {/* 問い合わせボタン */}
-      <div className="contact-button-wrapper">
-        <button onClick={handleContact} className="contact-button">
-          お問い合わせ
-        </button>
-      </div>
     </div>
   );
 }

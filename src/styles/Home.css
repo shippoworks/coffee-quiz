@@ -16,6 +16,7 @@
     margin: 1rem 2rem;
     color: #fd7200;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
   }
 
   .home-intro-eng {
@@ -23,6 +24,7 @@
     margin: 1rem 2rem;
     color: #fd7200;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
   }
   
   .quiz-level-buttons {
@@ -38,7 +40,7 @@
   .quiz-button {
     margin: 0.5rem;
     padding: 0.7rem 2.5rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     background-color: rgba(255, 255, 255, 0.7);
     color: #fd7200;
     font-weight: bold;
