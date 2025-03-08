@@ -149,10 +149,11 @@ function Quiz() {
           </p>
 
           {/* 正解の回答 */}
-          <p className='correct-answer'>正解：{currentQuestion.answers[currentQuestion.correctIndex]}</p>
+          
 
           {/* 解説 */}
           <div className="explanation">
+            <p className='correct-answer'>正解：{currentQuestion.answers[currentQuestion.correctIndex]}</p>
             <p>{currentQuestion.explanation}</p>
           </div>
 
