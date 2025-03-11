@@ -18,7 +18,7 @@ function Home() {
     navigate(`/quiz/${level}`);
   };
 
-  
+
 
   return (
     <div className="home-container">
@@ -49,6 +49,19 @@ function Home() {
           </button>
         ))}
       </div>
+
+      <footer className="home-footer">
+        {/* プライバシーポリシーへのリンクボタン */}
+        <button
+          className="footer-button" onClick={() => navigate('/privacy')}      >         プライバシーポリシー
+        </button>
+
+        {/* お問合せページへのリンクボタン */}
+        <button
+          className="footer-button"
+          onClick={() => navigate('/contact')}
+        >       お問合せ
+        </button>    </footer>
 
     </div>
   );

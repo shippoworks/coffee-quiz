@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
+import PrivacyPolicy from './components/PrivacyPolicy';  // プライバシーポリシーのページ
+import Contact from './components/Contact';              // お問い合わせページ
 
 function RouteChangeTracker() {
   const location = useLocation();
@@ -27,6 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quiz/:level" element={<Quiz />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );
