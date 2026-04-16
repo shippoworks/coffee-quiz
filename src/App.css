@@ -1,6 +1,0 @@
-/* ブラウザのデフォルト余白を取り除くリセット */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
