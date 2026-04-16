@@ -5,4 +5,4 @@ compatibility_date = "2024-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "coffee-quiz-db"
-database_id = "REPLACE_WITH_YOUR_DATABASE_ID"
+database_id = "a4b63ce5-f2a3-45e0-8040-93a97edda972"
