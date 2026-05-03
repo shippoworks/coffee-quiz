@@ -6,6 +6,8 @@ interface Props {
   onNavigate: (path: string) => void
 }
 
+const BADGE_CLASSES = ['badge-1', 'badge-2', 'badge-3', 'badge-4', 'badge-5']
+
 export default function Home({ onNavigate }: Props) {
   const [levels, setLevels] = useState<Level[]>([])
   const [loading, setLoading] = useState(true)
@@ -34,29 +36,31 @@ export default function Home({ onNavigate }: Props) {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Coffee Quiz</h1>
+      <div className="home-header">
+        <h1 className="home-title">Coffee Quiz</h1>
+        <p className="home-subtitle">コーヒーの知識をレベルアップ ☕</p>
+      </div>
 
-      <p className="home-intro">
-        味は変わらない。
-        けれど知るほどに
-        <br />
-        その一杯が物語になる。
-      </p>
+      <div className="home-intro-card">
+        <p>味は変わらない。けれど知るほどに<br />その一杯が物語になる。</p>
+        <p>The taste never changes. Yet with each new insight,<br />that single cup unfolds into a story all its own.</p>
+      </div>
 
-      <p className="home-intro-eng">
-        The taste never changes. Yet with each new insight, that single cup gently unfolds into a story all its own.
-      </p>
+      <p className="home-levels-title">レベルを選択</p>
 
       <div className="quiz-level-buttons">
-        {loading && <p style={{ color: '#fd7200' }}>Loading...</p>}
-        {error && <p style={{ color: '#5e5e5e' }}>エラーが発生しました</p>}
-        {!loading && !error && levels.map(level => (
+        {loading && <p className="home-loading">読み込み中...</p>}
+        {error && <p className="home-loading">エラーが発生しました</p>}
+        {!loading && !error && levels.map((level, i) => (
           <button
             key={level.id}
             onClick={() => handleStartQuiz(level)}
             className="quiz-button"
           >
-            {level.title}（{level.question_count}問）
+            <span>{level.title}</span>
+            <span className={`quiz-button-badge ${BADGE_CLASSES[i % BADGE_CLASSES.length]}`}>
+              {level.question_count}問
+            </span>
           </button>
         ))}
       </div>

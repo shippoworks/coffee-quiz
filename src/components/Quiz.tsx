@@ -7,6 +7,22 @@ interface Props {
   onBack: () => void
 }
 
+function resultMessage(rate: number): string {
+  if (rate === 100) return '完璧！コーヒーマスター認定 🏆'
+  if (rate >= 80) return 'すごい！コーヒー通ですね ☕'
+  if (rate >= 60) return 'なかなかです！もう少しで上級者 🌱'
+  if (rate >= 40) return '基礎はバッチリ。さらに深掘りしよう 📖'
+  return 'これから始まる。コーヒーの世界は深い ✨'
+}
+
+function resultEmoji(rate: number): string {
+  if (rate === 100) return '🏆'
+  if (rate >= 80) return '🎉'
+  if (rate >= 60) return '👍'
+  if (rate >= 40) return '📖'
+  return '☕'
+}
+
 export default function Quiz({ level, onBack }: Props) {
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
   const [loading, setLoading] = useState(true)
@@ -35,13 +51,20 @@ export default function Quiz({ level, onBack }: Props) {
   }, [level])
 
   if (loading) {
-    return <div className="quiz-container"><p>Loading...</p></div>
+    return (
+      <div className="quiz-container">
+        <p style={{ textAlign: 'center', color: '#9AAABF', paddingTop: '40px' }}>読み込み中...</p>
+      </div>
+    )
   }
 
   if (error || questions.length === 0) {
     return (
       <div className="quiz-container">
-        <h2>Lv. {level} のクイズは存在しません</h2>
+        <div className="quiz-top-bar">
+          <button className="quiz-back-btn" onClick={onBack}>←</button>
+        </div>
+        <p style={{ color: '#9AAABF', textAlign: 'center' }}>クイズが見つかりませんでした</p>
         <button className="home-back" onClick={onBack}>ホームに戻る</button>
       </div>
     )
@@ -50,20 +73,25 @@ export default function Quiz({ level, onBack }: Props) {
   if (isFinished) {
     const correctRate = Math.floor((score / questions.length) * 100)
     return (
-      <div className="quiz-container">
-        <h2>Lv. {level} のクイズが終了しました！</h2>
-        <p className="quiz-result">{questions.length}問中 {score}問 正解</p>
-        <p className="quiz-result">正答率:</p>
-        <p className="correct-Rate">{correctRate}%</p>
-        <button className="home-back" onClick={onBack}>ホームに戻る</button>
+      <div className="result-container">
+        <div className="result-emoji">{resultEmoji(correctRate)}</div>
+        <p className="result-title">Level {level} クリア！</p>
+        <div className="result-score-card">
+          <div className="result-rate">{correctRate}%</div>
+          <p className="result-detail">{questions.length}問中 {score}問 正解</p>
+        </div>
+        <p className="result-message">{resultMessage(correctRate)}</p>
+        <button className="home-back" onClick={onBack}>← ホームに戻る</button>
       </div>
     )
   }
 
   const current = questions[currentIndex]
   const isCorrect = selectedIndex === current.correctIndex
+  const progressPct = Math.round(((currentIndex) / questions.length) * 100)
 
   const handleAnswer = (answerIndex: number) => {
+    if (isAnswered) return
     setSelectedIndex(answerIndex)
     setIsAnswered(true)
     if (answerIndex === current.correctIndex) {
@@ -86,54 +114,60 @@ export default function Quiz({ level, onBack }: Props) {
     setIsAnswered(false)
   }
 
+  const getAnswerClass = (index: number) => {
+    if (!isAnswered) return selectedIndex === index ? 'answer-button selected' : 'answer-button'
+    if (index === current.correctIndex) return 'answer-button correct'
+    if (index === selectedIndex) return 'answer-button incorrect'
+    return 'answer-button'
+  }
+
   return (
     <div className="quiz-container">
-      <h2>Lv. {level}</h2>
-      <p>question {currentIndex + 1} / {questions.length}</p>
-      <h3>{current.question}</h3>
-
-      {!isAnswered && (
-        <div className="answers-section">
-          {current.answers.map((answer, index) => (
-            <button
-              key={index}
-              className={`answer-button${selectedIndex === index ? ' selected' : ''}`}
-              onClick={() => handleAnswer(index)}
-              disabled={isAnswered}
-            >
-              {answer}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {isAnswered && (
-        <div className="answers-section">
-          {current.answers.map((answer, index) => (
-            <button
-              key={index}
-              className={`answer-button${selectedIndex === index ? ' selected' : ''}`}
-              onClick={() => handleAnswer(index)}
-              disabled={isAnswered}
-            >
-              {answer}
-            </button>
-          ))}
-          <p
-            className="judge-text"
-            style={{ color: isCorrect ? '#fd7200' : '#5e5e5e' }}
-          >
-            {isCorrect ? '正解！' : '不正解...'}
-          </p>
-          <div className="explanation">
-            <p className="correct-answer">正解：{current.answers[current.correctIndex]}</p>
-            <p>{current.explanation}</p>
+      <div className="quiz-top-bar">
+        <button className="quiz-back-btn" onClick={onBack}>←</button>
+        <div className="quiz-progress-wrap">
+          <div className="quiz-progress-label">
+            {currentIndex + 1} / {questions.length}問
           </div>
-          <button className="next-button" onClick={handleNext}>
-            次の問題へ進む
-          </button>
+          <div className="quiz-progress-bar">
+            <div className="quiz-progress-fill" style={{ width: `${progressPct}%` }} />
+          </div>
         </div>
-      )}
+      </div>
+
+      <div className="quiz-question-card">
+        <div className="quiz-level-badge">Level {level}</div>
+        <p className="quiz-question-text">{current.question}</p>
+      </div>
+
+      <div className="answers-section">
+        {current.answers.map((answer, index) => (
+          <button
+            key={index}
+            className={getAnswerClass(index)}
+            onClick={() => handleAnswer(index)}
+            disabled={isAnswered}
+          >
+            {answer}
+          </button>
+        ))}
+
+        {isAnswered && (
+          <>
+            <div className={`judge-banner ${isCorrect ? 'correct' : 'incorrect'}`}>
+              {isCorrect ? '正解！ 🎉' : '不正解... 😢'}
+            </div>
+            <div className="explanation-card">
+              <p className="correct-answer-label">正解</p>
+              <p className="correct-answer-text">{current.answers[current.correctIndex]}</p>
+              <p className="explanation-text">{current.explanation}</p>
+            </div>
+            <button className="next-button" onClick={handleNext}>
+              {currentIndex === questions.length - 1 ? '結果を見る →' : '次の問題へ →'}
+            </button>
+          </>
+        )}
+      </div>
     </div>
   )
 }
